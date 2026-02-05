@@ -1,2 +1,3 @@
-# template-repository
-A template for repositories with standard Strategy Unit files
+# {modparams} 📦
+
+Set up and modify NHP model parameter lists, and export them as JSON files.

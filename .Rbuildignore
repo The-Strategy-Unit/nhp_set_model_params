@@ -1,0 +1,4 @@
+^LICENSE\.md$
+^[.]vscode
+^CODEOWNERS$
+^.*[.]code\-workspace$
