@@ -1,0 +1,19 @@
+dataset:
+scenario:
+user:
+seed:
+create_datetime:
+app_version: v4.4
+start_year: 2023
+end_year: 2043
+model_runs: 256
+demographic_factors:
+  variant_probabilities:
+    migration_category: 1
+non-demographic_adjustment: ndg3
+ip:
+op:
+aae:
+time_profile_mappings:
+health_status_adjustment: true
+viewable: false

@@ -1,6 +1,6 @@
 Package: modparams
 Title: Set up and modify NHP model parameter lists
-Version: 0.0.1
+Version: 0.1.0
 Authors@R:
     person(
         "Fran", "Barton",
@@ -16,12 +16,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 Depends: R (>= 4.4)
 Imports:
-    assertthat,
-    base64enc,
     dplyr,
-    httr2,
     purrr,
     rlang,
+    stringr,
     tibble,
     tidyr,
+    yaml,
     yyjsonr
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
