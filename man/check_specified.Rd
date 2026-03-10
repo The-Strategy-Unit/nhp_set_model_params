@@ -4,7 +4,7 @@
 \alias{check_specified}
 \title{Function to check that a params element is not NULL}
 \usage{
-check_specified(x)
+check_specified(x, bp = base_params, sp = supplementary_params)
 }
 \arguments{
 \item{x}{The name of the list element to check}

@@ -47,13 +47,14 @@ create_custom_params <- function(config_file, intervals_data, ...) {
   base_params <- yaml::read_yaml(config_file) |>
     purrr::assign_in("create_datetime", create_dttm) |>
     purrr::assign_in("time_profile_mappings", time_profiles_lst) |>
-    purrr::modify_at("user", \(x) x %||% Sys.getenv("NHP_API_USER"))
+    purrr::modify_at("user", \(x) x %||% Sys.getenv("NHP_API_USER", NULL))
 
   if (base_params[["non-demographic_adjustment"]] == "ndg3") {
     base_params <- base_params |>
       purrr::assign_in("non-demographic_adjustment", ndg3_values_lst)
   }
-  chkd <- purrr::map_chr(c("dataset", "scenario", "seed"), check_specified)
+  to_check <- c("dataset", "scenario", "seed", "user")
+  chkd <- rlang::set_names(purrr::map(to_check, check_specified), to_check)
   file_basename <- stringr::str_to_snake(paste(chkd[["scenario"]], create_dttm))
   custom_params <- base_params |>
     purrr::list_modify(!!!intervals_lst) |>
@@ -66,15 +67,13 @@ create_custom_params <- function(config_file, intervals_data, ...) {
 #'
 #' @param x The name of the list element to check
 #' @keywords internal
-check_specified <- function(x) {
-  base_params <- rlang::caller_env()[["base_params"]]
-  custom_params <- rlang::caller_env()[["custom_params"]]
-  msg <- "{.fn create_params_json}: variable {.var {x}} has not been specified"
-  out <- base_params[[x]] %||% custom_params[[x]]
+check_specified <- function(x, bp = base_params, sp = supplementary_params) {
+  msg <- "{.fn create_custom_params}: variable {.var {x}} was not specified"
+  out <- bp[[x]] %||% sp[[x]]
   if (is.null(out)) {
-    rlang::abort(msg, class = "params_check")
+    cli::cli_abort(msg, class = "params_check")
   } else {
-    rlang::set_names(out, x)
+    out
   }
 }
 
