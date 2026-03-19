@@ -44,7 +44,7 @@ create_custom_params <- function(config_file, intervals_data, ...) {
   time_profiles_lst <- get_linear_time_profiles(intervals_data)
   ndg3_values_lst <- yaml::read_yaml(get_local_sysfile("ndg3_values.yaml"))
 
-  base_params <- yaml::read_yaml(config_file) |>
+  params_lst <- yaml12::read_yaml(config_file) |>
     purrr::assign_in("create_datetime", create_dttm) |>
     purrr::assign_in("time_profile_mappings", time_profiles_lst) |>
     purrr::modify_at("user", \(x) x %||% Sys.getenv("NHP_API_USER", NULL))
