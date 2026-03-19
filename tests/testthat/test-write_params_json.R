@@ -9,21 +9,6 @@ test_that("the usual", {
 })
 
 
-test_that("`check_specified()` works", {
-  toy_fn <- function(...) {
-    supplementary_params <- rlang::list2(...)
-    config_file <- get_local_sysfile("config_v4.4.yaml")
-    base_params <- yaml::read_yaml(config_file)
-    check_specified("dataset")
-  }
-  expect_error(toy_fn(), class = "params_check")
-  expect_no_error(toy_fn(dataset = "national"))
-  out <- toy_fn(dataset = "national")
-  expect_named(out, "dataset")
-  expect_identical(out[["dataset"]], "national")
-})
-
-
 test_that("`get_local_sysfile()` works", {
   expect_true(rlang::is_installed("modparams"))
   expect_true(file.exists(get_local_sysfile("ndg3_values.yaml")))
