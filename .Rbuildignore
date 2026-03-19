@@ -2,3 +2,6 @@
 ^[.]vscode
 ^CODEOWNERS$
 ^.*[.]code\-workspace$
+^[.]?air[.]toml$
+^\.vscode$
+^\.lintr$
