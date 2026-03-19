@@ -3,3 +3,4 @@
 export(create_custom_params)
 export(validate_files)
 export(write_params_json)
+export(write_params_to_file)

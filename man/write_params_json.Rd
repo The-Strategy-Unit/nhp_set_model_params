@@ -13,22 +13,22 @@ essential elements of the params list to be created.}
 \item{intervals_data}{data frame containing p10 and p90 intervals for TPMAs.
 Must contain columns \code{type}, \code{change_factor}, \code{strategy} and \code{interval}.
 These intervals will be used to create the params and time profile mappings
-for all included TPMAs ("strategies").}
+for all included TPMAs (aka "strategies").}
 
-\item{save_to}{file path. The location to which the .json file will be
-written. The default value is \code{"."} (the user's current working directory).}
+\item{save_to}{path. The directory to which the .json file will be written.
+The default value is \code{"."} (the user's current working directory).}
 
-\item{...}{Named arguments that you can use to supply values to fill in blank
-values from the config, or overwrite values from the config.
+\item{...}{Named arguments that you can use to provide values that are empty
+in the config file, and to potentially overwrite default values.
 Using \code{...} is an alternative to editing the config file directly, and may
-facilitate the programmatic generation of params files.
-In particular, the "dataset", "scenario" and "seed" elements of the params
-list do not generally have default values and so may be blank (NULL,
-unspecified) in the base config. These must not remain blank, so you must
-supply values here if they are not already supplied in the config file.}
+facilitate the programmatic generation of params lists.
+In particular, the "dataset", "scenario", "user" and "seed" elements of the
+params list do not generally have default values and so are empty (NULL,
+unspecified) in the default config. These must not remain empty, so you must
+supply values here if you have not already edited them in the config file.}
 }
 \value{
-The location to which the params.json file will be written
+The full file path to which the .json file has been written
 }
 \description{
 Create custom NHP model parameters and write them to a JSON file

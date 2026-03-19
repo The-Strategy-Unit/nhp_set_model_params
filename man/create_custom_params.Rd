@@ -2,7 +2,7 @@
 % Please edit documentation in R/write_params_json.R
 \name{create_custom_params}
 \alias{create_custom_params}
-\title{Create custom NHP model parameters}
+\title{Create a list of custom NHP model parameters}
 \usage{
 create_custom_params(config_file, intervals_data, ...)
 }
@@ -13,23 +13,21 @@ essential elements of the params list to be created.}
 \item{intervals_data}{data frame containing p10 and p90 intervals for TPMAs.
 Must contain columns \code{type}, \code{change_factor}, \code{strategy} and \code{interval}.
 These intervals will be used to create the params and time profile mappings
-for all included TPMAs ("strategies").}
+for all included TPMAs (aka "strategies").}
 
-\item{...}{Named arguments that you can use to supply values to fill in blank
-values from the config, or overwrite values from the config.
+\item{...}{Named arguments that you can use to provide values that are empty
+in the config file, and to potentially overwrite default values.
 Using \code{...} is an alternative to editing the config file directly, and may
-facilitate the programmatic generation of params files.
-In particular, the "dataset", "scenario" and "seed" elements of the params
-list do not generally have default values and so may be blank (NULL,
-unspecified) in the base config. These must not remain blank, so you must
-supply values here if they are not already supplied in the config file.}
+facilitate the programmatic generation of params lists.
+In particular, the "dataset", "scenario", "user" and "seed" elements of the
+params list do not generally have default values and so are empty (NULL,
+unspecified) in the default config. These must not remain empty, so you must
+supply values here if you have not already edited them in the config file.}
 }
 \value{
-A list containing a derived output filename and the custom params
+A list of custom params
 }
 \description{
-Use a YAML config file to set up a base params list. Intervals data is
-then required. Specific values in the params list may be supplied using
-named values in \code{...}. These will replace existing values or NULLs from the
-base config.
+Use a YAML config file to set up a base params list. Intervals data must also
+be supplied. Specific values may be supplied using named values in \code{...}.#'  These will replace existing values or NULLs from the base config.
 }
