@@ -4,14 +4,11 @@
 [![MIT licence](https://img.shields.io/badge/License-MIT-yellow.svg)][mitlic]
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable release][repostatus_svg]][repostatus_info]
-[![Lifecycle: experimental][lifecycle_svg]][lifecycle]
 ![GitHub R package version][gh_ver]
 
 [mitlic]: https://opensource.org/licenses/MIT
 [repostatus_info]: https://www.repostatus.org/#wip
 [repostatus_svg]: https://www.repostatus.org/badges/latest/wip.svg
-[lifecycle]: https://lifecycle.r-lib.org/articles/stages.html#experimental
-[lifecycle_svg]: https://img.shields.io/badge/lifecycle-experimental-orange.svg
 [gh_ver]: https://img.shields.io/github/r-package/v/The-Strategy-Unit/nhp_set_model_params
 <!-- badges: end -->
 
