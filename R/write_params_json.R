@@ -48,11 +48,12 @@ create_custom_params <- function(config_file, intervals_data, ...) {
     purrr::list_modify(!!!intervals) |>
     purrr::list_modify(...)
 
-  # Currently, assigning ndg3 values is the only valid option here. But this
-  # step is set up so as to be ready to work with other options in future.
   if (params_lst[["non-demographic_adjustment"]] == "ndg3") {
     ndg3_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
     purrr::assign_in(params_lst, "non-demographic_adjustment", ndg3_values)
+  } else if (params_lst[["non-demographic_adjustment"]] == "ndg2") {
+    ndg2_values <- yaml12::read_yaml(get_local_sysfile("ndg2_values.yaml"))
+    purrr::assign_in(params_lst, "non-demographic_adjustment", ndg2_values)
   } else {
     params_lst
   }
