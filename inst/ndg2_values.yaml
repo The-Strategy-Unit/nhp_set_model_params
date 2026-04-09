@@ -1,0 +1,14 @@
+variant: ndg2
+value-type: year-on-year-growth
+values:
+  ip:
+    elective: [1.0053, 1.0071]
+    non-elective: [0.9955, 1.0017]
+    maternity: [1, 1]
+  op:
+    first: [1.0228, 1.027]
+    followup: [1.0228, 1.027]
+    procedure: [1.0228, 1.027]
+  aae:
+    ambulance: [1.0121, 1.0142]
+    walk-in: [1.0121, 1.0142]
