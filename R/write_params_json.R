@@ -6,7 +6,13 @@
 #'
 #' @returns The full file path to which the .json file has been written
 #' @export
-write_params_json <- function(config_file, intervals_data, save_to = ".", ...) {
+write_params_json <- function(
+  config_file,
+  intervals_data,
+  ndg_variant = c("ndg2", "ndg3"),
+  save_dir = ".",
+  ...
+) {
   params_lst <- create_custom_params(config_file, intervals_data, ...)
   filenm_stub <- glue::glue_data(params_lst, "{scenario}_{create_datetime}")
   write_params_to_file(params_lst, filenm_stub, save_to)
@@ -24,6 +30,8 @@ write_params_json <- function(config_file, intervals_data, save_to = ".", ...) {
 #'  Must contain columns `type`, `change_factor`, `strategy` and `interval`.
 #'  These intervals will be used to create the params and time profile mappings
 #'  for all included TPMAs (aka "strategies").
+#' @param ndg_variant string. The set of non-demographic growth adjustment
+#'  values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.
 #' @param ... Named arguments that you can use to provide values that are empty
 #'  in the config file, and to potentially overwrite default values.
 #'  Using `...` is an alternative to editing the config file directly, and may
@@ -35,7 +43,13 @@ write_params_json <- function(config_file, intervals_data, save_to = ".", ...) {
 #'
 #' @returns A list of custom params
 #' @export
-create_custom_params <- function(config_file, intervals_data, ...) {
+create_custom_params <- function(
+  config_file,
+  intervals_data,
+  ndg_variant = c("ndg2", "ndg3"),
+  ...
+) {
+  ndg_variant <- rlang::arg_match(ndg_variant)
   create_dttm <- substr(sub(" ", "_", gsub("[:-]", "", Sys.time())), 1L, 15L)
   intervals <- get_intervals_list(intervals_data)
   time_profiles <- get_linear_time_profiles(intervals_data)
