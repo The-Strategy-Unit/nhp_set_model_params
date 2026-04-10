@@ -4,14 +4,14 @@
 \alias{write_params_to_file}
 \title{Write a list of params to a .json file}
 \usage{
-write_params_to_file(params_lst, filenm_stub, save_to)
+write_params_to_file(params_lst, filenm_stub, save_dir)
 }
 \arguments{
 \item{params_lst}{R list of custom params (created by \link{create_custom_params})}
 
 \item{filenm_stub}{A file name stub (.json extension will be added)}
 
-\item{save_to}{path. The directory to which the .json file will be written.
+\item{save_dir}{path. The directory to which the .json file will be written.
 The default value is \code{"."} (the user's current working directory).}
 }
 \value{

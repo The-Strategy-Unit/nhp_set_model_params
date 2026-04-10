@@ -1,7 +1,7 @@
 #' Create custom NHP model parameters and write them to a JSON file
 #'
 #' @inheritParams create_custom_params
-#' @param save_to path. The directory to which the .json file will be written.
+#' @param save_dir path. The directory to which the .json file will be written.
 #'  The default value is `"."` (the user's current working directory).
 #'
 #' @returns The full file path to which the .json file has been written
@@ -15,7 +15,7 @@ write_params_json <- function(
 ) {
   params_lst <- create_custom_params(config_file, intervals_data, ...)
   filenm_stub <- glue::glue_data(params_lst, "{scenario}_{create_datetime}")
-  write_params_to_file(params_lst, filenm_stub, save_to)
+  write_params_to_file(params_lst, filenm_stub, save_dir)
 }
 
 
@@ -93,8 +93,8 @@ get_local_sysfile <- function(...) {
 #' @inheritParams write_params_json
 #' @returns The full file path to which the .json file has been written
 #' @export
-write_params_to_file <- function(params_lst, filenm_stub, save_to) {
-  file_out <- file.path(save_to, paste0(filenm_stub, ".json"))
+write_params_to_file <- function(params_lst, filenm_stub, save_dir) {
+  file_out <- file.path(save_dir, paste0(filenm_stub, ".json"))
   yyj_write_opts <- yyjsonr::opts_write_json(pretty = TRUE, auto_unbox = TRUE)
   yyjsonr::write_json_file(params_lst, file_out, yyj_write_opts)
   file_out
