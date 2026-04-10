@@ -54,24 +54,21 @@ create_custom_params <- function(
   intervals <- get_intervals_list(intervals_data)
   time_profiles <- get_linear_time_profiles(intervals_data)
 
-  params_lst <- yaml12::read_yaml(config_file) |>
+  if (ndg_variant == "ndg2") {
+    ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg2_values.yaml"))
+  } else {
+    ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
+  }
+  yaml12::read_yaml(config_file) |>
     purrr::assign_in("create_datetime", create_dttm) |>
+    purrr::assign_in("non-demographic_adjustment", ndg_values) |>
     purrr::modify_at("time_profile_mappings", \(x) {
       purrr::list_modify(x, !!!time_profiles)
     }) |>
     purrr::list_modify(!!!intervals) |>
     purrr::list_modify(...)
-
-  if (params_lst[["non-demographic_adjustment"]] == "ndg3") {
-    ndg3_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
-    purrr::assign_in(params_lst, "non-demographic_adjustment", ndg3_values)
-  } else if (params_lst[["non-demographic_adjustment"]] == "ndg2") {
-    ndg2_values <- yaml12::read_yaml(get_local_sysfile("ndg2_values.yaml"))
-    purrr::assign_in(params_lst, "non-demographic_adjustment", ndg2_values)
-  } else {
-    params_lst
-  }
 }
+
 
 #' Helper function to return the file path to a bundled base config YAML file
 #'
