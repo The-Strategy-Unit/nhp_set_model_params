@@ -60,9 +60,9 @@ The first option is probably preferable.
 ```r
 intervals_list <- readRDS("intervals_data_from_qmd.rds")
 
-# config skeleton for NHP model version 4.4
-config_file <- system.file("config_v4.4.yaml", package = "modparams")
 model_version <- "v4.4"
+# config skeleton for NHP model version 4.4
+config_file <- modparams::get_config_filepath(model_version)
 
 # `write_params_json()` writes a file to disk, and returns the path to the file
 file_out <- modparams::write_params_json(
@@ -80,20 +80,25 @@ file_out <- modparams::write_params_json(
 
 ```r
 config_file <- "custom_config.yaml"
-file.copy(system.file("config_v4.4.yaml", package = "modparams"), config_file)
+file.copy(modparams::get_config_filepath(model_version), config_file)
 
-# manually edit custom_config.yaml to add dataset, scenario, user etc.
+# ! Now manually edit custom_config.yaml to add dataset, scenario, user etc.
 
 file_out <- modparams::write_params_json(config_file, intervals_list[[1]])
 ```
+
+### Validate your generated params file
 
 You can validate the file you have just created:
 
 ```r
 modparams::validate_files(file_out, model_version)
 ```
+(note that `write_params_json()` returns the file path to the file it created.)
+
 This should return `TRUE` if your file validates according to the NHP model
 JSON Schema, or return `FALSE`.
+
 You can use `error = TRUE` to get the function to error if the file is invalid:
 
 ```r
@@ -103,7 +108,7 @@ modparams::validate_files(file_out, model_version, error = TRUE)
 
 ### Things to note
 
-Certain params must be supplied by the user:
+There are certain params you as the user must supply:
 
 * `config_file`
 * `intervals_data`
@@ -115,7 +120,7 @@ Certain params must be supplied by the user:
 \* *supplied within `...` or by editing the config file*
 
 Other arguments can be used to overwrite the default values in the config file.
-This is probably easier than editing the config file directly, but whatever
+This is probably easier than editing the config file directly; but whatever
 suits you.
 
 In the above example, although `end_year` has a default value in the config
@@ -128,7 +133,7 @@ Please make suggestions for future development via the Issues area of the repo.
 And of course report any problems or bugs found, noting what you expected to
 happen and what you actually observed.
 
-Currently (March 2026) we are at v4.4 of the NHP model:
+Currently (April 2026) we are at v4.4 of the NHP model:
 
 * The package currently only handles NDG3 values.
 * Only "linear" time profiles are catered for, which matches the current design

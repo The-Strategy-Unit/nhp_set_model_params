@@ -59,6 +59,13 @@ create_custom_params <- function(config_file, intervals_data, ...) {
   }
 }
 
+#' Helper function to return the file path to a bundled base config YAML file
+#'
+#' @param v string The NHP version for the config file, for example "v4.4"
+#' @returns A file path to the config file, as bundled with the package
+#' @export
+get_config_filepath <- \(v) get_local_sysfile(paste0("config_", v, ".yaml"))
+
 
 get_local_sysfile <- function(...) {
   purrr::partial(system.file, package = "modparams", mustWork = TRUE)(...)

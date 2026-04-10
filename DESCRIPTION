@@ -1,6 +1,6 @@
 Package: modparams
 Title: Set up and modify NHP model parameter lists
-Version: 0.4.0
+Version: 0.4.2
 Authors@R:
     person(
         "Fran", "Barton",
