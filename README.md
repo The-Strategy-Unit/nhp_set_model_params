@@ -135,7 +135,6 @@ happen and what you actually observed.
 
 Currently (April 2026) we are at v4.4 of the NHP model:
 
-* The package currently only handles NDG3 values.
 * Only "linear" time profiles are catered for, which matches the current design
   of the NHP model.
 * The v4.4 YAML config file included in the package is likely to be suitable for

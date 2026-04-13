@@ -4,7 +4,13 @@
 \alias{write_params_json}
 \title{Create custom NHP model parameters and write them to a JSON file}
 \usage{
-write_params_json(config_file, intervals_data, save_to = ".", ...)
+write_params_json(
+  config_file,
+  intervals_data,
+  ndg_variant = c("ndg2", "ndg3"),
+  save_dir = ".",
+  ...
+)
 }
 \arguments{
 \item{config_file}{string. File path to a YAML config file that specifies
@@ -15,7 +21,10 @@ Must contain columns \code{type}, \code{change_factor}, \code{strategy} and \cod
 These intervals will be used to create the params and time profile mappings
 for all included TPMAs (aka "strategies").}
 
-\item{save_to}{path. The directory to which the .json file will be written.
+\item{ndg_variant}{string. The set of non-demographic growth adjustment
+values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.}
+
+\item{save_dir}{path. The directory to which the .json file will be written.
 The default value is \code{"."} (the user's current working directory).}
 
 \item{...}{Named arguments that you can use to provide values that are empty

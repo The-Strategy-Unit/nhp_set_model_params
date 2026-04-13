@@ -4,7 +4,12 @@
 \alias{create_custom_params}
 \title{Create a list of custom NHP model parameters}
 \usage{
-create_custom_params(config_file, intervals_data, ...)
+create_custom_params(
+  config_file,
+  intervals_data,
+  ndg_variant = c("ndg2", "ndg3"),
+  ...
+)
 }
 \arguments{
 \item{config_file}{string. File path to a YAML config file that specifies
@@ -14,6 +19,9 @@ essential elements of the params list to be created.}
 Must contain columns \code{type}, \code{change_factor}, \code{strategy} and \code{interval}.
 These intervals will be used to create the params and time profile mappings
 for all included TPMAs (aka "strategies").}
+
+\item{ndg_variant}{string. The set of non-demographic growth adjustment
+values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.}
 
 \item{...}{Named arguments that you can use to provide values that are empty
 in the config file, and to potentially overwrite default values.

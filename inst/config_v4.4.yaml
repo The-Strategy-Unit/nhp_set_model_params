@@ -31,7 +31,7 @@ baseline_adjustment:
 waiting_list_adjustment:
   ip: {}
   op: {}
-non-demographic_adjustment: ndg3
+non-demographic_adjustment:
 activity_avoidance:
   ip: {}
   op: {}
