@@ -5,14 +5,14 @@
 \title{Create a list of custom NHP model parameters}
 \usage{
 create_custom_params(
-  config_file,
+  config,
   intervals_data,
   ndg_variant = c("ndg2", "ndg3"),
   ...
 )
 }
 \arguments{
-\item{config_file}{string. File path to a YAML config file that specifies
+\item{config}{string. File path to a YAML config file that specifies
 essential elements of the params list to be created.}
 
 \item{intervals_data}{data frame containing p10 and p90 intervals for TPMAs.
