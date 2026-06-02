@@ -5,7 +5,7 @@
 \title{Create custom NHP model parameters and write them to a JSON file}
 \usage{
 write_params_json(
-  config_file,
+  config,
   intervals_data,
   ndg_variant = c("ndg2", "ndg3"),
   save_dir = ".",
@@ -13,7 +13,7 @@ write_params_json(
 )
 }
 \arguments{
-\item{config_file}{string. File path to a YAML config file that specifies
+\item{config}{string. File path to a YAML config file that specifies
 essential elements of the params list to be created.}
 
 \item{intervals_data}{data frame containing p10 and p90 intervals for TPMAs.
