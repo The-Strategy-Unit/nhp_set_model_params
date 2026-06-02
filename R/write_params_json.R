@@ -7,13 +7,13 @@
 #' @returns The full file path to which the .json file has been written
 #' @export
 write_params_json <- function(
-  config_file,
+  config,
   intervals_data,
   ndg_variant = c("ndg2", "ndg3"),
   save_dir = ".",
   ...
 ) {
-  params_lst <- create_custom_params(config_file, intervals_data, ...)
+  params_lst <- create_custom_params(config, intervals_data, ndg_variant, ...)
   filenm_stub <- glue::glue_data(params_lst, "{scenario}_{create_datetime}")
   write_params_to_file(params_lst, filenm_stub, save_dir)
 }
@@ -24,7 +24,7 @@ write_params_json <- function(
 #' Use a YAML config file to set up a base params list. Intervals data must also
 #'  be supplied. Specific values may be supplied using named values in `...`.#'  These will replace existing values or NULLs from the base config.
 #'
-#' @param config_file string. File path to a YAML config file that specifies
+#' @param config string. File path to a YAML config file that specifies
 #'  essential elements of the params list to be created.
 #' @param intervals_data data frame containing p10 and p90 intervals for TPMAs.
 #'  Must contain columns `type`, `change_factor`, `strategy` and `interval`.
@@ -44,7 +44,7 @@ write_params_json <- function(
 #' @returns A list of custom params
 #' @export
 create_custom_params <- function(
-  config_file,
+  config,
   intervals_data,
   ndg_variant = c("ndg2", "ndg3"),
   ...
@@ -59,7 +59,7 @@ create_custom_params <- function(
   } else {
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
   }
-  yaml12::read_yaml(config_file) |>
+  yaml12::read_yaml(config) |>
     purrr::assign_in("create_datetime", create_dttm) |>
     purrr::assign_in("non-demographic_adjustment", ndg_values) |>
     purrr::modify_at("time_profile_mappings", \(x) {
