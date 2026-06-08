@@ -15,7 +15,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 4.4)
 Imports:
-    dplyr,
     glue,
     jsonvalidate,
     purrr,
