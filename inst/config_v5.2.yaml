@@ -1,0 +1,41 @@
+user:
+dataset:
+scenario:
+seed:
+create_datetime:
+model_runs: 256
+start_year: 2023
+end_year: 2041
+app_version: v5.2
+demographic_factors:
+  variant_probabilities:
+    migration_category: 1
+health_status_adjustment: true
+expat:
+  ip: {}
+  op: {}
+  aae: {}
+repat_local:
+  ip: {}
+  op: {}
+  aae: {}
+repat_nonlocal:
+  ip: {}
+  op: {}
+  aae: {}
+inequalities: {}
+baseline_adjustment:
+  ip: {}
+  op: {}
+  aae: {}
+waiting_list_adjustment:
+  ip: {}
+  op: {}
+non-demographic_adjustment:
+activity_avoidance:
+  ip: {}
+  op: {}
+  aae: {}
+efficiencies:
+  ip: {}
+  op: {}

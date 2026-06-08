@@ -52,7 +52,6 @@ create_custom_params <- function(
   ndg_variant <- rlang::arg_match(ndg_variant)
   create_dttm <- substr(sub(" ", "_", gsub("[:-]", "", Sys.time())), 1L, 15L)
   intervals <- get_intervals_list(intervals_data)
-  time_profiles <- get_linear_time_profiles(intervals_data)
 
   if (ndg_variant == "ndg2") {
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg2_values.yaml"))
@@ -62,9 +61,6 @@ create_custom_params <- function(
   yaml12::read_yaml(config) |>
     purrr::assign_in("create_datetime", create_dttm) |>
     purrr::assign_in("non-demographic_adjustment", ndg_values) |>
-    purrr::modify_at("time_profile_mappings", \(x) {
-      purrr::list_modify(x, !!!time_profiles)
-    }) |>
     purrr::list_modify(!!!intervals) |>
     purrr::list_modify(...)
 }
