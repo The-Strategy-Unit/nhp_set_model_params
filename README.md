@@ -60,8 +60,8 @@ The first option is probably preferable.
 ```r
 intervals_list <- readRDS("intervals_data_from_qmd.rds")
 
-model_version <- "v5.1"
-# config skeleton for NHP model version 4.4
+model_version <- "v5.2" # Note that this is not tied to the {modparams} version!
+# config skeleton for NHP model version 5.2
 config_file <- modparams::get_config_filepath(model_version)
 
 # `write_params_json()` writes a file to disk, and returns the path to the file
@@ -132,11 +132,3 @@ file, this is overridden by the value passed into the function via `...`.
 Please make suggestions for future development via the Issues area of the repo.
 And of course report any problems or bugs found, noting what you expected to
 happen and what you actually observed.
-
-Currently (June 2026) we are at v5.1 of the NHP model:
-
-* Only "linear" time profiles are catered for, which matches the current design
-  of the NHP model.
-* The v5.x YAML config files included in the package may or may not be suitable
-  for use with any later v5.x versions.
-  Future versions (eg from v6.0) may require updated YAML skeleton configs.
