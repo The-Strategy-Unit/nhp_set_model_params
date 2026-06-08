@@ -60,7 +60,7 @@ The first option is probably preferable.
 ```r
 intervals_list <- readRDS("intervals_data_from_qmd.rds")
 
-model_version <- "v4.4"
+model_version <- "v5.1"
 # config skeleton for NHP model version 4.4
 config_file <- modparams::get_config_filepath(model_version)
 
@@ -72,7 +72,7 @@ file_out <- modparams::write_params_json(
   scenario = "my-custom-scenario", # check this matches the intervals data
   seed = 87654L, # can be any random integer
   user = "nhp.user", # you should use your own name/username
-  end_year = 2039L # supply years as integers (with the `L` suffix) or strings
+  end_year = 2043L # supply years as integers (with the `L` suffix) or strings
 )
 ```
 
@@ -110,14 +110,14 @@ modparams::validate_files(file_out, model_version, error = TRUE)
 
 There are certain params you as the user must supply:
 
-* `config_file`
+* `config`
 * `intervals_data`
 * `dataset`*
 * `scenario`*
 * `seed`*
 * `user`*
 
-\* *supplied within `...` or by editing the config file*
+\* _supplied within `...`, or by editing the config file_
 
 Other arguments can be used to overwrite the default values in the config file.
 This is probably easier than editing the config file directly; but whatever
@@ -133,10 +133,10 @@ Please make suggestions for future development via the Issues area of the repo.
 And of course report any problems or bugs found, noting what you expected to
 happen and what you actually observed.
 
-Currently (April 2026) we are at v4.4 of the NHP model:
+Currently (June 2026) we are at v5.1 of the NHP model:
 
 * Only "linear" time profiles are catered for, which matches the current design
   of the NHP model.
-* The v4.4 YAML config file included in the package is likely to be suitable for
-  use with any later v4.x versions.
-  But future versions (eg from v5) may require updated YAML skeleton configs.
+* The v5.x YAML config files included in the package may or may not be suitable
+  for use with any later v5.x versions.
+  Future versions (eg from v6.0) may require updated YAML skeleton configs.
