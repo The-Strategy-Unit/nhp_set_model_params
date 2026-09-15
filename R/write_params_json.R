@@ -28,8 +28,7 @@ write_params_json <- function(
 #'  essential elements of the params list to be created.
 #' @param intervals_data data frame containing p10 and p90 intervals for TPMAs.
 #'  Must contain columns `type`, `change_factor`, `strategy` and `interval`.
-#'  These intervals will be used to create the params and time profile mappings
-#'  for all included TPMAs (aka "strategies").
+#'  These intervals will be used to create the params for all included TPMAs
 #' @param ndg_variant string. The set of non-demographic growth adjustment
 #'  values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.
 #' @param ... Named arguments that you can use to provide values that are empty
@@ -39,7 +38,7 @@ write_params_json <- function(
 #'  In particular, the "dataset", "scenario", "user" and "seed" elements of the
 #'  params list do not generally have default values and so are empty (NULL,
 #'  unspecified) in the default config. These must not remain empty, so you must
-#'  supply values here if you have not already edited them in the config file.
+#'  supply values here, if you have not already edited them in the config file.
 #'
 #' @returns A list of custom params
 #' @export

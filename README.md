@@ -1,14 +1,15 @@
 # {modparams} ![R](https://www.r-project.org/favicon-32x32.png)🛵📦📝
 
 <!-- badges: start -->
-[![MIT licence](https://img.shields.io/badge/License-MIT-yellow.svg)][mitlic]
-[![Project Status: WIP – Initial development is in progress, but there
-has not yet been a stable release][repostatus_svg]][repostatus_info]
+[![License: MIT][mit_svg]][mitlic]
+[![Project Status: Active -- The project has reached a stable, usable state and
+is being actively developed][repostatus_svg]][repostatus_info]
 ![GitHub R package version][gh_ver]
 
+[mit_svg]: https://img.shields.io/badge/License-MIT-yellow.svg?label=licence
 [mitlic]: https://opensource.org/licenses/MIT
-[repostatus_info]: https://www.repostatus.org/#wip
-[repostatus_svg]: https://www.repostatus.org/badges/latest/wip.svg
+[repostatus_svg]: https://www.repostatus.org/badges/latest/active.svg
+[repostatus_info]: https://www.repostatus.org/#active
 [gh_ver]: https://img.shields.io/github/r-package/v/The-Strategy-Unit/nhp_set_model_params
 <!-- badges: end -->
 
