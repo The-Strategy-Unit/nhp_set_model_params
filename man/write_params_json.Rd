@@ -18,8 +18,7 @@ essential elements of the params list to be created.}
 
 \item{intervals_data}{data frame containing p10 and p90 intervals for TPMAs.
 Must contain columns \code{type}, \code{change_factor}, \code{strategy} and \code{interval}.
-These intervals will be used to create the params and time profile mappings
-for all included TPMAs (aka "strategies").}
+These intervals will be used to create the params for all included TPMAs}
 
 \item{ndg_variant}{string. The set of non-demographic growth adjustment
 values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.}
@@ -34,7 +33,7 @@ facilitate the programmatic generation of params lists.
 In particular, the "dataset", "scenario", "user" and "seed" elements of the
 params list do not generally have default values and so are empty (NULL,
 unspecified) in the default config. These must not remain empty, so you must
-supply values here if you have not already edited them in the config file.}
+supply values here, if you have not already edited them in the config file.}
 }
 \value{
 The full file path to which the .json file has been written
