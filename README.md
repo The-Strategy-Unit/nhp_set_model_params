@@ -61,7 +61,7 @@ The first option is probably preferable.
 ```r
 intervals_list <- readRDS("intervals_data_from_qmd.rds")
 
-model_version <- "v5.2" # Note that this is not tied to the {modparams} version!
+model_version <- "v6.1" # Note that this is not tied to the {modparams} version!
 # config skeleton for NHP model version 5.2
 config_file <- modparams::get_config_filepath(model_version)
 
