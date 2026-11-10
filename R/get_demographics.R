@@ -17,7 +17,7 @@ get_provider_demographics <- function(
   tenant_id <- Sys.getenv("AZ_TENANT_ID")
   api_endpoint <- Sys.getenv("OPENPLAN_API_ENDPOINT")
 
-  if (!(nzchar(app_id) || nzchar(tenant_id))) {
+  if (!nzchar(app_id) || !nzchar(tenant_id)) {
     cli::cli_abort("AZ_APP_ID and AZ_TENANT_ID envvars must be set.")
   }
 
