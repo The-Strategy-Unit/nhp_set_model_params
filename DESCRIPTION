@@ -15,7 +15,11 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 4.4)
 Imports:
+    azkit,
+    AzureAuth,
+    cli,
     glue,
+    httr2,
     jsonvalidate,
     purrr,
     rlang,
@@ -24,6 +28,8 @@ Imports:
     withr,
     yaml12,
     yyjsonr
+Remotes:
+    github::the-strategy-unit/azkit
 Suggests:
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

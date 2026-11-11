@@ -57,11 +57,18 @@ create_custom_params <- function(
   } else {
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
   }
-  yaml12::read_yaml(config) |>
+
+  p <- yaml12::read_yaml(config) |>
     purrr::assign_in("create_datetime", create_dttm) |>
     purrr::assign_in("non-demographic_adjustment", ndg_values) |>
     purrr::list_modify(!!!intervals) |>
     purrr::list_modify(...)
+
+  if ("demographic_adjustment" %in% names(p)) {
+    add_demographic_adjustment(p)
+  } else {
+    p
+  }
 }
 
 
@@ -90,4 +97,32 @@ write_params_to_file <- function(params_lst, filenm_stub, save_dir) {
   yyj_write_opts <- yyjsonr::opts_write_json(pretty = TRUE, auto_unbox = TRUE)
   yyjsonr::write_json_file(params_lst, file_out, yyj_write_opts)
   file_out
+}
+
+
+#' Helper function to add the demographic adjustment values to params.
+#'
+#' @param params The model params
+#' @returns The model params with demographic adjustment values added
+add_demographic_adjustment <- function(params) {
+  ds <- params$dataset
+  sy <- params$start_year
+  ey <- params$end_year
+
+  if (is.null(ds) || is.null(sy) || is.null(ey)) {
+    cli::cli_abort(
+      "Dataset, start year, or end year are not specified in the config file."
+    )
+  }
+
+  dv <- params$demographic_adjustment$variant %||% "migration_category"
+
+  params[["demographic_adjustment"]] <- get_provider_demographics(
+    provider = ds,
+    start_year = sy,
+    end_year = ey,
+    variant = dv
+  )
+
+  params
 }
