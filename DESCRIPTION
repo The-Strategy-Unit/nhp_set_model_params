@@ -17,6 +17,7 @@ Depends: R (>= 4.4)
 Imports:
     azkit,
     AzureAuth,
+    cli,
     glue,
     httr2,
     jsonvalidate,

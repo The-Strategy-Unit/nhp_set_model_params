@@ -64,7 +64,11 @@ create_custom_params <- function(
     purrr::list_modify(!!!intervals) |>
     purrr::list_modify(...)
 
-  add_demographic_adjustment(p)
+  if ("demographic_adjustment" %in% names(p)) {
+    add_demographic_adjustment(p)
+  } else {
+    p
+  }
 }
 
 
@@ -101,10 +105,13 @@ write_params_to_file <- function(params_lst, filenm_stub, save_dir) {
 #' @param params The model params
 #' @returns The model params with demographic adjustment values added
 add_demographic_adjustment <- function(params) {
-  ds <- p$dataset
-  sy <- p$start_year
-  ey <- p$end_year
-  dv <- p$demographic_adjustment$variant %||% "migration_category"
+  ds <- params$dataset
+  sy <- params$start_year
+  ey <- params$end_year
+  dv <- params$demographic_adjustment$variant
+  if (is.null(dv)) {
+    dv <- "migration_category"
+  }
 
   if (is.null(ds) || is.null(sy) || is.null(ey)) {
     cli::cli_abort(
@@ -112,12 +119,12 @@ add_demographic_adjustment <- function(params) {
     )
   }
 
-  p[["demographic_adjustment"]] <- get_provider_demographics(
+  params[["demographic_adjustment"]] <- get_provider_demographics(
     provider = ds,
     start_year = sy,
     end_year = ey,
     variant = dv
   )
 
-  p
+  params
 }
