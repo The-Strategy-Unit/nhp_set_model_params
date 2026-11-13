@@ -108,16 +108,14 @@ add_demographic_adjustment <- function(params) {
   ds <- params$dataset
   sy <- params$start_year
   ey <- params$end_year
-  dv <- params$demographic_adjustment$variant
-  if (is.null(dv)) {
-    dv <- "migration_category"
-  }
 
   if (is.null(ds) || is.null(sy) || is.null(ey)) {
     cli::cli_abort(
-      "Dataset, start year, or end year ar not specified in the config file."
+      "Dataset, start year, or end year are not specified in the config file."
     )
   }
+
+  dv <- params$demographic_adjustment$variant %||% "migration_category"
 
   params[["demographic_adjustment"]] <- get_provider_demographics(
     provider = ds,
