@@ -44,13 +44,12 @@ write_params_json <- function(
 #' @export
 create_custom_params <- function(
   config,
-  intervals_data,
+  intervals_data = NULL,
   ndg_variant = c("ndg2", "ndg3"),
   ...
 ) {
   ndg_variant <- rlang::arg_match(ndg_variant)
   create_dttm <- substr(sub(" ", "_", gsub("[:-]", "", Sys.time())), 1L, 15L)
-  intervals <- get_intervals_list(intervals_data)
 
   if (ndg_variant == "ndg2") {
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg2_values.yaml"))
@@ -58,17 +57,18 @@ create_custom_params <- function(
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
   }
 
-  p <- yaml12::read_yaml(config) |>
+  params <- yaml12::read_yaml(config) |>
     purrr::assign_in("create_datetime", create_dttm) |>
-    purrr::assign_in("non-demographic_adjustment", ndg_values) |>
-    purrr::list_modify(!!!intervals) |>
-    purrr::list_modify(...)
+    purrr::assign_in("non-demographic_adjustment", ndg_values)
 
-  if ("demographic_adjustment" %in% names(p)) {
-    add_demographic_adjustment(p)
-  } else {
-    p
+  if ("demographic_adjustment" %in% names(params)) {
+    params <- add_demographic_adjustment(params)
   }
+  if (!is.null(intervals_data)) {
+    intervals <- get_intervals_list(intervals_data)
+    params <- purrr::list_modify(params, !!!intervals)
+  }
+  purrr::list_modify(params, ...)
 }
 
 
