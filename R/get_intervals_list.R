@@ -7,6 +7,7 @@ get_intervals_list <- function(intervals_data) {
     tibble::deframe() |>
     purrr::map(\(x) tidyr::nest(x, .by = "type")) |>
     purrr::map(tibble::deframe) |>
+    purrr::map_depth(2, combine_intervals_as_vec) |>
     purrr::map_depth(2, tibble::deframe) |>
     # efficiencies must have a type as well as an interval
     purrr::modify_at("efficiencies", \(x) {
@@ -16,6 +17,17 @@ get_intervals_list <- function(intervals_data) {
         # but some are different
         purrr::modify_at("ip", adjust_ip_efficiencies)
     })
+}
+
+
+combine_intervals_as_vec <- function(tbl) {
+  tbl |>
+    dplyr::mutate(
+      interval = purrr::map2(.data[["p10"]], .data[["p90"]], \(x, y) {
+        list(interval = c(x, y))
+      }),
+      .keep = "unused"
+    )
 }
 
 
