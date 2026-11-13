@@ -1,4 +1,7 @@
 get_intervals_list <- function(intervals_data) {
+  stopifnot(is.data.frame(intervals_data))
+  exp_cols <- c("change_factor", "type", "strategy", "p10", "p90")
+  stopifnot(setequal(colnames(intervals_data), exp_cols))
   intervals_data |>
     tidyr::nest(.by = "change_factor") |>
     tibble::deframe() |>
