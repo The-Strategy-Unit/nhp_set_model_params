@@ -6,7 +6,7 @@
 \usage{
 write_params_json(
   config,
-  intervals_data,
+  intervals_data = NULL,
   ndg_variant = c("ndg2", "ndg3"),
   save_dir = ".",
   ...
