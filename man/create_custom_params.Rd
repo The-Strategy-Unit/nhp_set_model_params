@@ -6,7 +6,7 @@
 \usage{
 create_custom_params(
   config,
-  intervals_data,
+  intervals_data = NULL,
   ndg_variant = c("ndg2", "ndg3"),
   ...
 )
@@ -17,7 +17,9 @@ essential elements of the params list to be created.}
 
 \item{intervals_data}{data frame containing p10 and p90 intervals for TPMAs.
 Must contain columns \code{type}, \code{change_factor}, \code{strategy} and \code{interval}.
-These intervals will be used to create the params for all included TPMAs}
+These intervals will be used to create the params for all included TPMAs.
+If \code{NULL}, the default, no mitigation intervals will be included in the
+params file (this is equivalent to a zero mitigation scenario).}
 
 \item{ndg_variant}{string. The set of non-demographic growth adjustment
 values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.}
