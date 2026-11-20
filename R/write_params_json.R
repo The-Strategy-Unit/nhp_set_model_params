@@ -8,7 +8,7 @@
 #' @export
 write_params_json <- function(
   config,
-  intervals_data,
+  intervals_data = NULL,
   ndg_variant = c("ndg2", "ndg3"),
   save_dir = ".",
   ...
@@ -28,7 +28,9 @@ write_params_json <- function(
 #'  essential elements of the params list to be created.
 #' @param intervals_data data frame containing p10 and p90 intervals for TPMAs.
 #'  Must contain columns `type`, `change_factor`, `strategy` and `interval`.
-#'  These intervals will be used to create the params for all included TPMAs
+#'  These intervals will be used to create the params for all included TPMAs.
+#'  If `NULL`, the default, no mitigation intervals will be included in the
+#'  params file (this is equivalent to a zero mitigation scenario).
 #' @param ndg_variant string. The set of non-demographic growth adjustment
 #'  values to use. Possible values are "ndg2" or "ndg3", with ndg2 the default.
 #' @param ... Named arguments that you can use to provide values that are empty
@@ -44,13 +46,12 @@ write_params_json <- function(
 #' @export
 create_custom_params <- function(
   config,
-  intervals_data,
+  intervals_data = NULL,
   ndg_variant = c("ndg2", "ndg3"),
   ...
 ) {
   ndg_variant <- rlang::arg_match(ndg_variant)
   create_dttm <- substr(sub(" ", "_", gsub("[:-]", "", Sys.time())), 1L, 15L)
-  intervals <- get_intervals_list(intervals_data)
 
   if (ndg_variant == "ndg2") {
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg2_values.yaml"))
@@ -58,17 +59,18 @@ create_custom_params <- function(
     ndg_values <- yaml12::read_yaml(get_local_sysfile("ndg3_values.yaml"))
   }
 
-  p <- yaml12::read_yaml(config) |>
+  params <- yaml12::read_yaml(config) |>
     purrr::assign_in("create_datetime", create_dttm) |>
-    purrr::assign_in("non-demographic_adjustment", ndg_values) |>
-    purrr::list_modify(!!!intervals) |>
-    purrr::list_modify(...)
+    purrr::assign_in("non-demographic_adjustment", ndg_values)
 
-  if ("demographic_adjustment" %in% names(p)) {
-    add_demographic_adjustment(p)
-  } else {
-    p
+  if ("demographic_adjustment" %in% names(params)) {
+    params <- add_demographic_adjustment(params)
   }
+  if (!is.null(intervals_data)) {
+    intervals <- get_intervals_list(intervals_data)
+    params <- purrr::list_modify(params, !!!intervals)
+  }
+  purrr::list_modify(params, ...)
 }
 
 
